@@ -1,26 +1,23 @@
 
 import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Menu extends JFrame{
+public class Salud extends JFrame{
 	private JPanel pNorte, pSur, pOeste, pEste, pCentro;
 	private JButton btnMenu, btnUsuario, btnHorarios, btnSalud;
-	private JLabel lblMensaje;
 	private JFrame ventanaActual, ventanaAnterior;
 	
-	public Menu() {
+	public Salud(JFrame va) {
 		ventanaActual = this;
-		//ventanaAnterior = va;
+		ventanaAnterior = va;
 		setBounds(200, 200, 600, 400);
-		setTitle("MENU");
+		setTitle("SALUD");
 		
 		pNorte = new JPanel();
 		pSur = new JPanel();
@@ -34,13 +31,10 @@ public class Menu extends JFrame{
 		btnHorarios = new JButton("HORARIOS");
 		btnSalud = new JButton("SALUD");
 		
-		lblMensaje = new JLabel("Bienvenido nombre, estas son tus actividades para hoy: ");
-		
 		pOeste.add(btnMenu);
 		pOeste.add(btnUsuario);
 		pOeste.add(btnSalud);
 		pOeste.add(btnHorarios);
-		pNorte.add(lblMensaje);
 		
 		getContentPane().add(pEste, BorderLayout.EAST);
 		getContentPane().add(pCentro, BorderLayout.CENTER);
@@ -48,21 +42,21 @@ public class Menu extends JFrame{
 		getContentPane().add(pSur, BorderLayout.SOUTH);
 		getContentPane().add(pOeste, BorderLayout.WEST);
 		
+		btnMenu.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ventanaActual.setVisible(false);
+				new Menu();
+			}
+		});
+		
 		btnUsuario.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ventanaActual.setVisible(false);
-				new Usuario(ventanaActual);	
-			}
-		});
-		
-		btnSalud.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ventanaActual.setVisible(false);
-				new Salud(ventanaActual);			
+				new Usuario(ventanaActual);
 			}
 		});
 		
@@ -76,9 +70,6 @@ public class Menu extends JFrame{
 		});
 		
 		setVisible(true);
-	}
-	public static void main(String[] args) {
-		new Menu();
 	}
 }
 
