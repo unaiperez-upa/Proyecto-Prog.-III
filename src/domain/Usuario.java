@@ -1,3 +1,4 @@
+package domain;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -8,16 +9,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Salud extends JFrame{
+import Horario;
+
+public class Usuario extends JFrame{
 	private JPanel pNorte, pSur, pOeste, pEste, pCentro;
 	private JButton btnMenu, btnUsuario, btnHorarios, btnSalud;
 	private JFrame ventanaActual, ventanaAnterior;
 	
-	public Salud(JFrame va) {
+	public Usuario(JFrame va) {
 		ventanaActual = this;
 		ventanaAnterior = va;
 		setBounds(200, 200, 600, 400);
-		setTitle("SALUD");
+		setTitle("USUARIO");
 		
 		pNorte = new JPanel();
 		pSur = new JPanel();
@@ -51,12 +54,12 @@ public class Salud extends JFrame{
 			}
 		});
 		
-		btnUsuario.addActionListener(new ActionListener() {
+		btnSalud.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ventanaActual.setVisible(false);
-				new Usuario(ventanaActual);
+				new Salud(ventanaActual);
 			}
 		});
 		
@@ -72,4 +75,3 @@ public class Salud extends JFrame{
 		setVisible(true);
 	}
 }
-
