@@ -1,5 +1,5 @@
 package domain;
 
-public class Opinion {
+public class Admin {
 
 }
