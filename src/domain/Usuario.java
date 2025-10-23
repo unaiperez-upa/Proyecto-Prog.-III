@@ -8,7 +8,7 @@ public class Usuario {
 	private String nombre;
 	private String apellidos;
 	private String dni;
-	private String id;
+	private int id;
 	private String email;
 	private String numTelefono;
 	private String password;
@@ -24,7 +24,7 @@ public class Usuario {
 	
 	
 
-	public Usuario(String nombre, String apellidos, String dni, String id, String email, String numTelefono,
+	public Usuario(String nombre, String apellidos, String dni, int id, String email, String numTelefono,
 			String password, CarritoCompra carrito, Date fechaRegistro, List<Pedido> historiaPedidos, boolean activo) {
 		super();
 		this.nombre = nombre;
@@ -65,11 +65,11 @@ public class Usuario {
 		this.dni = dni;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
