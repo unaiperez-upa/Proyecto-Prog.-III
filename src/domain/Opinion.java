@@ -12,6 +12,7 @@ public class Opinion {
     private String comentario;
     private Date fechaOpinion;
     private int meGusta;
+    private boolean visible;
     
     
 	public Opinion() {
@@ -20,7 +21,7 @@ public class Opinion {
 
 
 	public Opinion(int id, Usuario usuario, Producto producto, int puntuacion, String titulo, String comentario,
-			Date fechaOpinion, int meGusta) {
+			Date fechaOpinion, int meGusta, boolean visible) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
@@ -30,6 +31,7 @@ public class Opinion {
 		this.comentario = comentario;
 		this.fechaOpinion = fechaOpinion;
 		this.meGusta = meGusta;
+		this.visible = visible;
 	}
 
 
@@ -99,15 +101,23 @@ public class Opinion {
 	public void setMeGusta(int meGusta) {
 		this.meGusta = meGusta;
 	}
+	
+	public boolean isVisible() {
+		return visible;
+	}
 
-
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+    
 	@Override
 	public String toString() {
 		return "Opinion [id=" + id + ", usuario=" + usuario + ", producto=" + producto + ", puntuacion=" + puntuacion
 				+ ", titulo=" + titulo + ", comentario=" + comentario + ", fechaOpinion=" + fechaOpinion + ", meGusta="
-				+ meGusta + "]";
+				+ meGusta + ", visible=" + visible + "]";
 	}
-    
+
+
 	public boolean valoracionEsPositiva() {
 		if (this.puntuacion >= 4) {
 			return true;
@@ -123,7 +133,6 @@ public class Opinion {
 			return false;
 		}
 	}
-	
 	
 	
 }

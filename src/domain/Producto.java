@@ -13,14 +13,16 @@ public class Producto {
     private int stock;
     private String categoria;
     private String marca;
+    private boolean activo;
     private List<Opinion> opiniones;
     
 	public Producto() {
 		super();
 	}
 
+
 	public Producto(int id, String nombre, String descripcion, double precio, String talla, String color, int stock,
-			String categoria, String marca, List<Opinion> opiniones) {
+			String categoria, String marca, boolean activo, List<Opinion> opiniones) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -31,8 +33,11 @@ public class Producto {
 		this.stock = stock;
 		this.categoria = categoria;
 		this.marca = marca;
+		this.activo = activo;
 		this.opiniones = opiniones;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -106,6 +111,15 @@ public class Producto {
 		this.marca = marca;
 	}
 
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
+
 	public List<Opinion> getOpiniones() {
 		return opiniones;
 	}
@@ -113,8 +127,15 @@ public class Producto {
 	public void setOpiniones(List<Opinion> opiniones) {
 		this.opiniones = opiniones;
 	}
-    
-	
+    	
+	@Override
+	public String toString() {
+		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
+				+ ", talla=" + talla + ", color=" + color + ", stock=" + stock + ", categoria=" + categoria + ", marca="
+				+ marca + ", activo=" + activo + ", opiniones=" + opiniones + "]";
+	}
+
+
 	public boolean hayStock(int cantidad) {
 		if (this.stock >= cantidad) {
 			return true;

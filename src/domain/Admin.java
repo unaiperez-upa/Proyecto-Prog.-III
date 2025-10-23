@@ -11,14 +11,15 @@ public class Admin {
 	
 	public Admin() {
 		super();
+		this.permisoTotal = true;
 	}
 
 
 	public Admin(String rol, Date fechaContratacion, boolean permisoTotal) {
 		super();
 		this.rol = rol;
-		this.fechaContratacion = fechaContratacion;
-		this.permisoTotal = permisoTotal;
+		this.fechaContratacion = new Date();
+		this.permisoTotal = true;
 	}
 	
 	
@@ -53,5 +54,29 @@ public class Admin {
 				+ "]";
 	}
 
+	public void agregarProducto(Producto producto) {
+        System.out.println("Producto agregado: " + producto.getNombre());
+    }
+    
+    public void eliminarProducto(Producto producto) {
+        producto.setActivo(false);
+        System.out.println("Producto eliminado: " + producto.getNombre());
+    }
+    
+    public void modificarProducto(Producto producto, String nuevoNombre, double nuevoPrecio) {
+        producto.setNombre(nuevoNombre);
+        producto.setPrecio(nuevoPrecio);
+        System.out.println("Producto modificado");
+    }
+    
+    public void gestionarPedido(Pedido pedido, String nuevoEstado) {
+        pedido.setEstado(nuevoEstado);
+        System.out.println("Estado del pedido " + pedido.getId() + " actualizado a: " + nuevoEstado);
+    }
+    
+    public void eliminarOpinion(Opinion opinion) {
+        opinion.setVisible(false);
+        System.out.println("Opinión eliminada por el administrador");
+    }
 	
 }
