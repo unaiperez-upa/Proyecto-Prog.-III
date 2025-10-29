@@ -1,4 +1,4 @@
-package giu;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -46,7 +46,7 @@ public class JPanelCatalogo extends JFrame {
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout(10, 10)); // 🔹 División vertical principal
+        setLayout(new BorderLayout(10, 10)); 
         getContentPane().setBackground(Color.WHITE);
 
         

@@ -1,9 +1,5 @@
 package main;
 
-import javax.swing.SwingUtilities;
-
-
-import giu.JPanelPrincipal;
 
 public class Main {
     
