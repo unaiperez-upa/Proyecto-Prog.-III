@@ -7,7 +7,9 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -72,9 +74,8 @@ public class JPanelCatalogo extends JFrame {
 	JPanel panelCatalogo = new JPanel(new BorderLayout());
 	
 	
-	public void panelProductos(List<Producto> producto) {
+	public JPanel panelProductos() {
 		
-		this.producto = producto;
 		
 		JScrollPane scrollPaneProductos = new JScrollPane(this.tablaProductos);
 		scrollPaneProductos.setBorder(new TitledBorder("Productos"));
@@ -82,11 +83,12 @@ public class JPanelCatalogo extends JFrame {
 		
 		this.txtFiltro = new JTextField(20);
 	
-		JPanel panel = new JPanel(new GridLayout(1, 2, 10, 10));
-		JPanel panelCatalogo = new JPanel();
-		JPanel panelIzquierdo = new JPanel(new GridLayout(2, 1, 10, 10));
+		JPanel panel = new JPanel(new GridLayout(2, 1, 10, 10));
+		panel.setSize(450, 600);
+        panel.setBorder(new TitledBorder("Productos de la tienda"));
 		
 		
+		 
 		
 		MouseMotionAdapter miMouseMotionListener = new MouseMotionAdapter() {
 			
@@ -120,13 +122,20 @@ public class JPanelCatalogo extends JFrame {
 		panelProductos.setLayout(new BorderLayout());
 		panelProductos.add(BorderLayout.CENTER, scrollPaneProductos);
 		panelProductos.add(BorderLayout.NORTH, panelFiltro);
+		return panel;
 		
 	}
 	
 	
 	private void initTables() { 
 		TableCellRenderer cellRenderer = (table, value, isSelected, hasFocus, row, column) -> {
+			
+			Vector<String> cabeceraComics = new Vector<String>(Arrays.asList( "ARTICULO", "IMAGEN", "PRECIO(€) "));
+			//Se crea el modelo de datos para la tabla de comics sólo con la cabecera
+			this.modeloDatosProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabeceraComics);
+			
 			JLabel result = new JLabel(value.toString());
+			
 			
 			
 			if (isSelected || (table.equals(tablaProductos) && filaTablaProductos == row)) {
@@ -147,6 +156,8 @@ public class JPanelCatalogo extends JFrame {
 		};
 		
 		
+	
+		
 		this.tablaProductos.setRowHeight(26);
 		this.tablaExplicacion.setRowHeight(26);
 		
@@ -159,11 +170,8 @@ public class JPanelCatalogo extends JFrame {
 	
 	}
 	public static void main(String[] args) {
-        // Crear la ventana en el hilo de eventos de Swing para no bloquear
-    	// el hilo de ejecución principal
-    	SwingUtilities.invokeLater(() -> {
-    		// Crear una instancia de JPanelCatalogo y hacerla visible
-    		JPanelCatalogo frame = new JPanelCatalogo();  
+        SwingUtilities.invokeLater(() -> {
+            JPanelCatalogo frame = new JPanelCatalogo();
             frame.setVisible(true);
         });
     }
