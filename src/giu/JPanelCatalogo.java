@@ -1,6 +1,7 @@
 package giu;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -13,8 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer; 
 
 import domain.Producto;
 
@@ -36,12 +39,40 @@ public class JPanelCatalogo extends JFrame {
 	private DefaultTableModel modeloDatosExplicacion;
 	private JScrollPane scrollPaneExplicacion;
 	
+	public JPanelCatalogo() {
+        setTitle("Catálogo de Productos");
+        setSize(900, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout(10, 10)); // 🔹 División vertical principal
+        getContentPane().setBackground(Color.WHITE);
+
+        
+        JPanel panelIzquierda = panelProductos();
+        add(panelIzquierda, BorderLayout.WEST);
+
+        
+        JPanel panelDerecha = new JPanel(new GridLayout(2, 1, 10, 10));
+
+        JPanel panelSuperior = new JPanel();
+        panelSuperior.setBorder(new TitledBorder("CARACTERISTICAS"));
+        panelSuperior.add(new JLabel("TALLA,STOCK,..."));
+
+        JPanel panelInferior = new JPanel();
+        panelInferior.setBorder(new TitledBorder("????"));
+        panelInferior.add(new JLabel());
+
+        panelDerecha.add(panelSuperior);
+        panelDerecha.add(panelInferior);
+
+        add(panelDerecha, BorderLayout.CENTER);
+    }
 	
 
 	JPanel panelCatalogo = new JPanel(new BorderLayout());
 	
 	
-	public void PanelCatalogo(List<Producto> producto) {
+	public void panelProductos(List<Producto> producto) {
 		
 		this.producto = producto;
 		
@@ -90,14 +121,50 @@ public class JPanelCatalogo extends JFrame {
 		panelProductos.add(BorderLayout.CENTER, scrollPaneProductos);
 		panelProductos.add(BorderLayout.NORTH, panelFiltro);
 		
+	}
+	
+	
+	private void initTables() { 
+		TableCellRenderer cellRenderer = (table, value, isSelected, hasFocus, row, column) -> {
+			JLabel result = new JLabel(value.toString());
+			
+			
+			if (isSelected || (table.equals(tablaProductos) && filaTablaProductos == row)) {
+				result.setBackground(table.getSelectionBackground());
+				result.setForeground(table.getSelectionBackground());
+			}
+			
+			if (table.equals(tablaProductos)) {
+				if (row % 2 == 0) {
+					result.setBackground(new Color(250, 250, 250));
+				} else {
+					result.setBackground(new Color(230, 255, 230));
+				}
+			}
+			
+			result.setOpaque(true);
+			return result;
+		};
 		
 		
+		this.tablaProductos.setRowHeight(26);
+		this.tablaExplicacion.setRowHeight(26);
 		
 		
-		
+		this.tablaProductos.getTableHeader().setReorderingAllowed(false);
+		this.tablaProductos.setAutoCreateRowSorter(true);
 		
 		
 		
 	
 	}
+	public static void main(String[] args) {
+        // Crear la ventana en el hilo de eventos de Swing para no bloquear
+    	// el hilo de ejecución principal
+    	SwingUtilities.invokeLater(() -> {
+    		// Crear una instancia de JPanelCatalogo y hacerla visible
+    		JPanelCatalogo frame = new JPanelCatalogo();  
+            frame.setVisible(true);
+        });
+    }
 }
